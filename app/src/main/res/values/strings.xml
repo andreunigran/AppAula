@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AppAula</string>
+    <string name="btn_ok">Click</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="texto_input"> </string>
+    <string name="info_nome">Entre com o nome</string>
+</resources>
