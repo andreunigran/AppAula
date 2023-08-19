@@ -14,17 +14,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import br.unigran.appaula.model.Pessoa;
+import br.unigran.appaula.persistence.PessoaDao;
+import br.unigran.appaula.persistence.PessoaImpl;
 
 public class MainActivity extends AppCompatActivity {
-
     EditText nome;
     EditText idade;
     TextView msg;
-
     Button botao;
+
+    ListView listagem;
+    ArrayAdapter adapter;
+
+    PessoaDao dao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dao= new PessoaImpl();
+
         setContentView(R.layout.activity_main);
         nome=findViewById(R.id.idNomePessoa);
 
@@ -32,23 +43,32 @@ public class MainActivity extends AppCompatActivity {
 
         botao=findViewById(R.id.idBtnOk);
 
+        listagem=findViewById(R.id.idLista);//listagem
 
+        adapter= new ArrayAdapter(getApplicationContext(),
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+                dao.listagem());// cria o adapter
+        listagem.setAdapter(adapter);//seta o adapter para listagem
         botao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //acao do botão
-                Toast.makeText(getApplicationContext(),"Ola mundo",Toast.LENGTH_SHORT).show();
+                Pessoa p = new Pessoa();
+                p.setNome(nome.getText().toString());
+                p.setIdade(Integer.parseInt(idade.getText().toString()));
+                dao.salvar(p);
+                adapter.notifyDataSetChanged();
             }
         });
     }
     public void cancelar(View view){
         //permite vinculo no xml
         AlertDialog.Builder acao = new AlertDialog.Builder(this);
-        acao.setTitle("texto");
-        acao.setItems(new CharSequence[]{"Ok","Cancelar"},new DialogInterface.OnClickListener() {
+        acao.setTitle("Você quer sair");
+        acao.setItems(new CharSequence[]{"Sair"},new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
+                    finish();
             }
         });
         acao.create().show();
