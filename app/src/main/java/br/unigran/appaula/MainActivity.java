@@ -18,8 +18,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import br.unigran.appaula.model.Pessoa;
+import br.unigran.appaula.persistence.DBHelper;
 import br.unigran.appaula.persistence.PessoaDao;
 import br.unigran.appaula.persistence.PessoaImpl;
+import br.unigran.appaula.persistence.PessoaImplBD;
 
 public class MainActivity extends AppCompatActivity {
     EditText nome;
@@ -31,10 +33,11 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter adapter;
 
     PessoaDao dao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dao= new PessoaImpl();
+        dao= new PessoaImplBD(this);
 
         setContentView(R.layout.activity_main);
         nome=findViewById(R.id.idNomePessoa);
@@ -56,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 Pessoa p = new Pessoa();
                 p.setNome(nome.getText().toString());
                 p.setIdade(Integer.parseInt(idade.getText().toString()));
+
+
                 dao.salvar(p);
                 adapter.notifyDataSetChanged();
             }
