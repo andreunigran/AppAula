@@ -15,6 +15,17 @@ public class PessoaImpl  implements PessoaDao{
     public void salvar(Pessoa p){
         lista.add(p);
     }
+
+    @Override
+    public void editar(Pessoa p) {
+
+    }
+
+    @Override
+    public void remove(Pessoa p) {
+
+    }
+
     @Override
     public List listagem(){
         return  lista;

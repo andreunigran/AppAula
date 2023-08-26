@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listagem;
     ArrayAdapter adapter;
-
+    List dados;
     PessoaDao dao;
 
     @Override
@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
         botao=findViewById(R.id.idBtnOk);
 
         listagem=findViewById(R.id.idLista);//listagem
-
+        dados=dao.listagem();
         adapter= new ArrayAdapter(getApplicationContext(),
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
-                dao.listagem());// cria o adapter
+                dados);// cria o adapter
         listagem.setAdapter(adapter);//seta o adapter para listagem
         botao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
 
                 dao.salvar(p);
+                dados=dao.listagem();
                 adapter.notifyDataSetChanged();
             }
         });
+
     }
     public void cancelar(View view){
         //permite vinculo no xml

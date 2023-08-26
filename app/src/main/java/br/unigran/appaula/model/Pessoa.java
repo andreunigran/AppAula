@@ -3,6 +3,7 @@ package br.unigran.appaula.model;
 import androidx.annotation.NonNull;
 
 public class Pessoa {
+    private  Integer id;
     private String nome;
     private Integer idade;
 
@@ -20,6 +21,14 @@ public class Pessoa {
 
     public void setIdade(Integer idade) {
         this.idade = idade;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @NonNull
