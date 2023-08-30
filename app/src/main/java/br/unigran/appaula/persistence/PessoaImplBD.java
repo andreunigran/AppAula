@@ -17,7 +17,7 @@ public class PessoaImplBD implements PessoaDao{
         ContentValues dados = new ContentValues();
         dados.put("nome",p.getNome());
            db.getWritableDatabase().insertOrThrow("pessoa",null,dados);
-
+            db.close();
     }
     @Override
     public void editar(Pessoa p) {
@@ -25,6 +25,8 @@ public class PessoaImplBD implements PessoaDao{
         dados.put("nome",p.getNome());
         db.getWritableDatabase().
        update("pessoa",dados,"id=?",new String[]{p.getId()+""});
+        db.close();
+
 
     }
 
@@ -32,6 +34,8 @@ public class PessoaImplBD implements PessoaDao{
     public void remove(Pessoa p) {
     db.getWritableDatabase()
     .delete("pessoa","id=?",new String[]{p.getId()+""} );
+        db.close();
+
     }
 
     public PessoaImplBD(Context context){
@@ -54,6 +58,7 @@ public class PessoaImplBD implements PessoaDao{
             p.setNome(cursor.getString(COLUMN_NOME));
             retorno.add(p);
         }
+        db.close();
 
         return retorno;
     }

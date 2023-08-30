@@ -16,7 +16,7 @@ public class Pessoa {
     }
 
     public Integer getIdade() {
-        return idade;
+        return idade!=null?idade:0;
     }
 
     public void setIdade(Integer idade) {
