@@ -18,12 +18,14 @@ public class PessoaImpl  implements PessoaDao{
 
     @Override
     public void editar(Pessoa p) {
-
+        if(lista.contains(p)){
+            lista.add(lista.indexOf(p),p);
+        }
     }
 
     @Override
     public void remove(Pessoa p) {
-
+        lista.remove(p);
     }
 
     @Override

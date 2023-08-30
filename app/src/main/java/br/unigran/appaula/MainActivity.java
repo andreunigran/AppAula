@@ -79,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
                     p = new Pessoa();
                 p.setNome(nome.getText().toString());
                 p.setIdade(Integer.parseInt(idade.getText().toString()));
-                dao.salvar(p);//salva
+                if(p.getId()==null)
+                    dao.salvar(p);//salva
+                else dao.editar(p);
                 limpaCampos();
                 atualizaDados();
             }
